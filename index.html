@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TITLE</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div class="no-events" id="instructionSign">Choose n points</div>
+<button class="defaultButton" id="resetButton">Reset</button>
+<button class="defaultButton" id="aboutButton">About</button>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button id="close">&times;</button>
+        <h2>Instructions</h2>
+        <ul>
+            <li>Choose 4 points on the canvas by clicking on it.</li>
+            <li>The program will draw two circles through the four chosen points.</li>
+            <li>The program will display coordinates of the points of intersection of these circles.</li>
+            <li>You can reset the canvas and start over by clicking the "Reset" button.</li>
+        </ul>
+        <p>This program was created by Bohdan Katrychenko.</p>
+        <p>For more details and to view the source code, please visit the <a href="https://github.com/Narisoval/circles-test-assignment" target="_blank">GitHub repository</a>.</p>
+    </div>
+</div>
+
+<ul class="no-events" id="points"></ul>
+<script type="module" src="scripts/main.js"> </script>
+</body>
+</html>
