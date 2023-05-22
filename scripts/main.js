@@ -1,7 +1,7 @@
 import {calculateDistance, findCircleIntersections} from "./mathOperations.js"
-import {canvas, ctx, instructionSign, pointListElement, resetButton,} from "./domElements.js"
+import {canvas, ctx, instructionSign, pointListElement,} from "./domElements.js"
 import {drawCircleBetweenPoints, drawPoint, point} from "./drawing.js"
-import {addModalWindowEventListeners} from "./modalWindow.js"
+import {addEventListeners} from "./eventListeners.js"
 
 const MAX_POINTS_COUNT = 4
 const POINT_DRAG_OFFSET = 10
@@ -9,21 +9,12 @@ const AB_CIRCLE_COLOR = '#0057B8'
 const CD_CIRCLE_COLOR = '#FFD700'
 const FIRST_POINT_LETTER = 'A'
 
-canvas.addEventListener('mousedown', onCanvasClick)
-canvas.addEventListener('mousemove', onCanavasDrag)
-canvas.addEventListener('mouseup', onEndCanavasDrag)
-resetButton.addEventListener('click', onReset)
-
-addModalWindowEventListeners()
-
-window.addEventListener('resize', onWindowResized)
-window.addEventListener('load', resizeCanvas)
-
-
 let points = []
 let dragging = false
 let selectedPointIndex = NaN
 let intersectionItems = [document.createElement('li'), document.createElement('li')]
+
+addEventListeners()
 
 updateInstructionsSign()
 
@@ -33,7 +24,7 @@ function updateInstructionsSign() {
         'Drag the points to adjust the circles'
 }
 
-function onCanvasClick(event) {
+export function onCanvasClick(event) {
 
     let coordinates = getCanvasCoordinates(event)
 
@@ -159,8 +150,7 @@ function updateIntersectionText(intersectionPoints) {
     })
 }
 
-
-function onCanavasDrag(event) {
+export function onCanvasDrag(event) {
     if (!dragging) return
 
     let coordinates = getCanvasCoordinates(event)
@@ -179,12 +169,12 @@ function changePointDisplayedCoordinates(index) {
     pointListElement.childNodes[index].textContent = getPointName(index)
 }
 
-function onEndCanavasDrag() {
+export function onEndCanvasDrag() {
     dragging = false
     selectedPointIndex = null
 }
 
-function onReset() {
+export function onReset() {
     points = []
 
     while (pointListElement.firstChild) {
@@ -196,14 +186,13 @@ function onReset() {
     updateInstructionsSign()
 }
 
-
-function onWindowResized() {
+export function onWindowResized() {
 
     resizeCanvas()
     redraw()
 }
 
-function resizeCanvas() {
+export function resizeCanvas() {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 }
